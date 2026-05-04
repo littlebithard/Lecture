@@ -1,8 +1,12 @@
 from flask import Flask
+import socket
+
 app = Flask(__name__)
 
 app.route("/")
 def home():
-    return "Hello CI/CD"
+    hostname = socket.gethostname()
+    return f"Hello from kubernetes pod: {hostname}\n"
 
-app.run(host="0.0.0.0", port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
